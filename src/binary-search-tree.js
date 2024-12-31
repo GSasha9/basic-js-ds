@@ -98,7 +98,7 @@ class BinarySearchTree {
         }
           let tempNode = findMinElement(node.right);
           node.data = tempNode.data;
-          node.rigth = removeNode(node.right, tempNode.data);
+          node.right = removeNode(node.right, tempNode.data);
           return node;
       } else if (data < node.data) {
         node.left = removeNode(node.left, data);
