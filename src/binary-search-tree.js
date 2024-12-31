@@ -64,14 +64,60 @@ class BinarySearchTree {
     return hasNode(currentNode);
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    let currentNode = this.givenRoot;
+    if(!currentNode) {
+      return null;
+    }
+
+    while(currentNode) {
+      if(currentNode.data === data) {
+        return currentNode;
+      } else if (currentNode.data > data) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+    }
+    return null;
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(data) {
+    function removeNode(node, data) {
+      if(!node) {
+        return null;
+      }
+
+      if(data === node.data) {
+        if(!node.left && !node.right) {
+          return node = null;
+        } else if(!node.left) {
+          return node.right;
+        } else if(!node.right) {
+          return node.left;
+        }
+          let tempNode = findMinElement(node.right);
+          node.data = tempNode.data;
+          node.rigth = removeNode(node.right, tempNode.data);
+          return node;
+      } else if (data < node.data) {
+        node.left = removeNode(node.left, data);
+        return node;
+      } else {
+        node.right = removeNode(node.right, data);
+        return node;
+      }
+    }
+
+
+    function findMinElement(node) {
+      while (node.left) {
+        node = node.left;
+        }
+        return node;
+    }
+
+    removeNode(this.givenRoot, data);
   }
 
   min() {
